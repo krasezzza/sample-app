@@ -1,8 +1,10 @@
+import { Request, Response } from "express";
+
 const express = require('express');
 const PORT = process.env.PORT || 3001;
 const server = express();
 
-server.get('/api', (req, res, next) => {
+server.get('/api', (req: Request, res: Response) => {
   res.json({ message: "Hello from the backend server!" });
 });
 

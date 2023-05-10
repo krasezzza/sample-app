@@ -91,5 +91,8 @@ lerna-debug.log
 Thumbs.db
 
 # Directory related
+backend/dist/
 backend/node_modules/
+
+frontend/dist/
 frontend/node_modules/
