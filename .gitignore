@@ -90,6 +90,10 @@ lerna-debug.log
 .DS_Store
 Thumbs.db
 
+# Config files
+.sequelizerc
+database.sqlite
+
 # Directory related
 backend/dist/
 backend/node_modules/

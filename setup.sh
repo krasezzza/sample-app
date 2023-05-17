@@ -7,6 +7,39 @@ echo "****************************"
 echo ""
 sleep 2
 
+if [ -f "./backend/.env" ];
+then
+  echo "DotEnv file already configured."
+else
+  cp ./backend/example/.env.example ./backend/.env
+  echo "DotEnv file is now configured!"
+fi
+echo ""
+sleep 2
+
+if [ -f "./backend/.sequelizerc" ];
+then
+  echo "DotSequelizeRC file already configured."
+else
+  cp ./backend/example/.sequelizerc.example ./backend/.sequelizerc
+  echo "DotSequelizeRC file is now configured!"
+fi
+echo ""
+sleep 2
+
+if [ -f "./backend/src/database.sqlite" ];
+then
+  echo "SQLite database already configured."
+else
+  cp ./backend/example/database.sqlite.example ./backend/database.sqlite
+  sleep 1
+  npm run be-migrate-up
+  npm run be-seed-up
+  echo "SQLite database is now configured!"
+fi
+echo ""
+sleep 2
+
 if [ -d "./backend/node_modules" ];
 then
   echo "Backend node_modules already installed."
@@ -34,7 +67,7 @@ sleep 2
 if [ -f "./frontend/node_modules/react-scripts/config/webpackDevServer.config.js" ];
 then
   rm ./frontend/node_modules/react-scripts/config/webpackDevServer.config.js
-  cp ./frontend/backup/webpackDevServer.config.js ./frontend/node_modules/react-scripts/config/
+  cp ./frontend/example/webpackDevServer.config.js ./frontend/node_modules/react-scripts/config/
   echo "Frontend react-scripts config file replaced!"
 fi
 echo ""

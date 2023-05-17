@@ -6,7 +6,11 @@
   "scripts": {
     "server": "npm run start --prefix backend",
     "client": "npm run start --prefix frontend",
-    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\""
+    "dev": "concurrently --kill-others-on-fail \"npm run server\" \"npm run client\"",
+    "be-migrate-up": "npm run migrate-up --prefix backend",
+    "be-migrate-down": "npm run migrate-down --prefix backend",
+    "be-seed-up": "npm run seed-up --prefix backend",
+    "be-seed-down": "npm run seed-down --prefix backend"
   },
   "keywords": [],
   "author": "",

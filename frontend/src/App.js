@@ -6,10 +6,10 @@ function App() {
   const [data, setData] = React.useState(null);
 
   React.useEffect(() => {
-    fetch('/api').then((res) => {
+    fetch('/api/user/2').then((res) => {
       return res.json()
     }).then((data) => {
-      return setData(data.message);
+      return setData(data);
     })
   });
 
@@ -19,7 +19,7 @@ function App() {
         <img src={logo} className="App-logo" alt="logo" />
 
         <p>
-          { !data ? "Loading..." : data }
+          { !data ? "Loading..." : `Hello, ${data.name} :)` }
         </p>
       </header>
     </div>

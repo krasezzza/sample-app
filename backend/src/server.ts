@@ -1,13 +1,18 @@
-import { Request, Response } from "express";
+import app from "./app";
+import dotenv from "dotenv";
+import * as http from "http";
+import sequelize from "./utils/dbConn";
 
-const express = require('express');
-const PORT = process.env.PORT || 3001;
-const server = express();
+// invoke the env vars
+dotenv.config();
 
-server.get('/api', (req: Request, res: Response) => {
-  res.json({ message: "Hello from the backend server!" });
-});
+const server = http.createServer(app);
+const PORT = process.env.SERVER_PORT || 3001;
 
-server.listen(PORT, () => {
-  console.log(`Server listening on ${PORT}`)
+sequelize.sync().then(() => {
+  server.listen(PORT, () => {
+    console.log(`Server listening on port ${PORT}...`)
+  });
+}).catch((err) => {
+  console.log(err);
 });

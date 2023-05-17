@@ -7,6 +7,54 @@ echo "****************************"
 echo ""
 sleep 2
 
+if [ -f "./backend/.env" ];
+then
+  rm -f ./backend/.env
+  sleep 1
+  cp ./backend/example/.env.example ./backend/.env
+  echo "DotEnv file is now refreshed."
+else
+  cp ./backend/example/.env.example ./backend/.env
+  echo "DotEnv file is now configured!"
+fi
+echo ""
+sleep 2
+
+if [ -f "./backend/.sequelizerc" ];
+then
+  rm -f ./backend/.sequelizerc
+  sleep 1
+  cp ./backend/example/.sequelizerc.example ./backend/.sequelizerc
+  echo "DotSequelizeRC file is now refreshed."
+else
+  cp ./backend/example/.sequelizerc.example ./backend/.sequelizerc
+  echo "DotSequelizeRC file is now configured!"
+fi
+echo ""
+sleep 2
+
+if [ -f "./backend/database.sqlite" ];
+then
+  npm run be-seed-down
+  npm run be-migrate-down
+  sleep 1
+  rm -f ./backend/database.sqlite
+  sleep 1
+  cp ./backend/example/database.sqlite.example ./backend/database.sqlite
+  sleep 1
+  npm run be-migrate-up
+  npm run be-seed-up
+  echo "SQLite database is now refreshed."
+else
+  cp ./backend/example/database.sqlite.example ./backend/database.sqlite
+  sleep 1
+  npm run be-migrate-up
+  npm run be-seed-up
+  echo "SQLite database is now configured!"
+fi
+echo ""
+sleep 2
+
 if [ -d "./backend/node_modules" ];
 then
   rm -rf ./backend/node_modules ./backend/package-lock.json
@@ -36,7 +84,7 @@ sleep 2
 if [ -f "./frontend/node_modules/react-scripts/config/webpackDevServer.config.js" ];
 then
   rm ./frontend/node_modules/react-scripts/config/webpackDevServer.config.js
-  cp ./frontend/backup/webpackDevServer.config.js ./frontend/node_modules/react-scripts/config/
+  cp ./frontend/example/webpackDevServer.config.js ./frontend/node_modules/react-scripts/config/
   echo "Frontend react-scripts config file replaced!"
 fi
 echo ""
