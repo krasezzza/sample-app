@@ -1,5 +1,5 @@
+import apiRoutes from "./routes/api.routes"
 import express from "express";
-import apiRoutes from "./routes/api"
 
 // initialize the app
 const app = express();

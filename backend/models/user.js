@@ -4,8 +4,8 @@ import sequelize from "../src/utils/dbConn";
 class User extends Model {}
 
 User.init({
-  name: DataTypes.STRING,
-  email: DataTypes.STRING
+  email: DataTypes.STRING,
+  password: DataTypes.STRING
 }, {
   sequelize,
   modelName: 'User'

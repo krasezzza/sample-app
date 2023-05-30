@@ -1,14 +1,3 @@
-const dotenv = require("dotenv");
-dotenv.config(); // invoke the env vars
+const config = require("./config");
 
-const envStr = process.env.APP_ENV;
-const config = {
-  "development": {
-    "dialect": "sqlite",
-    "storage": "database.sqlite"
-  },
-  "test": {},
-  "production": {}
-};
-
-module.exports = config[envStr];
+module.exports = config.database;

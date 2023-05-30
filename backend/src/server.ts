@@ -1,18 +1,15 @@
-import app from "./app";
-import dotenv from "dotenv";
-import * as http from "http";
 import sequelize from "./utils/dbConn";
-
-// invoke the env vars
-dotenv.config();
+import config from "../config/config";
+import logger from "../config/logger";
+import * as http from "http";
+import app from "./app";
 
 const server = http.createServer(app);
-const PORT = process.env.SERVER_PORT || 3001;
 
 sequelize.sync().then(() => {
-  server.listen(PORT, () => {
-    console.log(`Server listening on port ${PORT}...`)
+  server.listen(config.server.port, () => {
+    logger.info(`Server listening on port ${ config.server.port }...`);
   });
-}).catch((err) => {
-  console.log(err);
+}).catch((error) => {
+  logger.error(error.message, error);
 });
