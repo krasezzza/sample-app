@@ -13,6 +13,7 @@ export default class UserService {
   fetchAllUsers() {
     return this.repository.findAll(
     ).then((result: User[]) => {
+
       return result;
     }).catch((error: any) => {
       logger.error(error.message, error);
@@ -24,9 +25,11 @@ export default class UserService {
     return this.repository.findById(
       userId
     ).then((result: User | null) => {
+
       return result;
     }).catch((error: any) => {
       logger.error(error.message, error);
+
       return null;
     });
   }

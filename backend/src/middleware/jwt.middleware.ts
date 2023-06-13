@@ -1,33 +1,32 @@
 import { Request, Response, NextFunction } from "express";
 import { verify as jwtVerify } from "jsonwebtoken";
 import config from "../../config/config";
-import logger from "../../config/logger";
 
-const extractJWT = (req: Request, res: Response, next: NextFunction) => {
-  logger.info('Validating token');
-
-  let authToken = req.headers.authorization?.split(' ')[1];
-
-  if (authToken) {
-    jwtVerify(
-      authToken,
-      config.server.token.secret,
-      (error, decoded) => {
-        if (error) {
-          return res.status(404).json({
-            message: error.message,
-            error
-          });
-        } else {
-          res.locals.jwt = decoded;
-          next();
-        }
-      });
-  } else {
+export default (req: Request, res: Response, next: NextFunction) => {
+  const authHeader = req.get('Authorization');
+  if (!authHeader) {
     return res.status(401).json({
-      message: 'Unauthorized'
+      message: 'Missing authorization token!'
     });
   }
-};
 
-export default extractJWT;
+  const authToken = authHeader.split(' ')[1];
+  let decodedToken = null;
+
+  try {
+    decodedToken = jwtVerify(authToken, config.server.token.secret);
+  } catch (error: any) {
+    return res.status(401).json({
+      message: error.message
+    });
+  }
+
+  if (!decodedToken) {
+    return res.status(401).json({
+      message: 'Could not authenticate!'
+    });
+  }
+
+  res.locals.jwtToken = decodedToken;
+  next();
+};

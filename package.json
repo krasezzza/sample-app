@@ -3,6 +3,8 @@
   "version": "1.0.0",
   "description": "Communication between Node server and React client",
   "main": "index.js",
+  "author": "Krasimir Tsvetanov",
+  "license": "ISC",
   "scripts": {
     "server": "npm run start --prefix backend",
     "client": "npm run start --prefix frontend",
@@ -12,9 +14,6 @@
     "be-seed-up": "npm run seed-up --prefix backend",
     "be-seed-down": "npm run seed-down --prefix backend"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "dependencies": {
     "concurrently": "^8.0.1"
   }

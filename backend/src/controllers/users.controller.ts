@@ -3,7 +3,7 @@ import UserService from "../services/user.service";
 
 const userService: UserService = new UserService();
 
-const getList = async (req: Request, res: Response, next: NextFunction) => {
+const getAll = async (req: Request, res: Response, next: NextFunction) => {
   const list = await userService.fetchAllUsers();
 
   res.status(200).json(list);
@@ -18,6 +18,6 @@ const getOne = async (req: Request, res: Response, next: NextFunction) => {
 };
 
 export default {
-  getList,
+  getAll,
   getOne
 };
